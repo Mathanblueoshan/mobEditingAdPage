@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mathan | Video Editor</title>
+  <title>Mathan | Video Editor & Thumbnail Designer</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
 
@@ -11,261 +11,195 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
       font-family: 'Lexend', sans-serif;
-      background: linear-gradient(135deg, #fceabb, #f8b500);
-      color: #333;
+      background: linear-gradient(135deg, #2e003e, #ff4ecb);
+      color: #fff;
+      padding: 20px;
     }
 
     .container {
-      max-width: 700px;
-      margin: 60px auto;
-      background: #fff;
-      padding: 40px 20px;
+      max-width: 780px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
       border-radius: 20px;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1.2s ease;
-      text-align: center;
-      position: relative;
-    }
-
-    .lang-toggle {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 8px 14px;
-      border: none;
-      background: #34495e;
-      color: #fff;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.6rem;
-      transition: background 0.3s;
-      z-index: 10;
-    }
-
-    .lang-toggle:hover {
-      background: #2c3e50;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(15px);
+      animation: fadeIn 0.8s ease;
     }
 
     h1 {
-      color: #2c3e50;
+      text-align: center;
       font-size: 2.2rem;
-      margin-top:18px;
       margin-bottom: 10px;
+      color: #ffb3ec;
     }
 
-    p {
+    h2 {
+      margin-top: 30px;
+      font-size: 1.4rem;
+      color: #ff77dd;
+      border-bottom: 2px solid #ff77dd;
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+
+    p, li {
       font-size: 1rem;
       line-height: 1.6;
     }
 
     ul {
-      text-align: left;
-      margin: 20px 0;
-      padding-left: 20px;
-    }
-
-    ul li {
-      margin: 8px 0;
-      font-size: 1rem;
+      margin: 10px 0 20px 20px;
     }
 
     .highlight {
-      background: #fff3cd;
-      border-left: 5px solid #f0ad4e;
+      background: #fff0fa;
+      color: #560053;
       padding: 15px;
-      margin: 25px 0;
       border-radius: 10px;
+      margin: 20px 0;
       font-weight: bold;
-      animation: bounce 1.2s ease-in-out infinite alternate;
+      text-align: center;
+      animation: pulse 2s infinite;
     }
 
-    .cta-button, .telegram-button {
+    .card-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: #ffffff10;
+      padding: 20px;
+      border-radius: 15px;
+      transition: transform 0.3s, background 0.3s;
+      border: 1px solid #ff77dd33;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      background: #ffffff20;
+    }
+
+    .button-group {
+      text-align: center;
+      margin: 15px 0 30px;
+    }
+
+    a.button {
       display: inline-block;
-      background: #27ae60;
-      color: white;
-      padding: 14px 24px;
-      border-radius: 10px;
+      background: #ff4ecb;
+      color: #fff;
+      padding: 12px 20px;
+      margin: 10px 8px;
       text-decoration: none;
+      border-radius: 8px;
       font-weight: bold;
-      margin: 12px 10px;
-      transition: transform 0.2s ease, background 0.3s ease;
+      transition: 0.3s ease;
     }
 
-    .cta-button:hover, .telegram-button:hover {
-      background: #1e8449;
+    a.button:hover {
+      background: #ff88e4;
       transform: scale(1.05);
     }
 
-    .telegram-button {
-      background: #0088cc;
-    }
-
-    .telegram-button:hover {
-      background: #0077b6;
-    }
-
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 15px;
-      margin-top: 20px;
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
     footer {
-      margin-top: 30px;
+      margin-top: 40px;
+      text-align: center;
       font-size: 0.9rem;
-      color: #666;
+      color: #ddd;
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes bounce {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(-5px);
-      }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
 
     @media (max-width: 768px) {
+      .card-group {
+        grid-template-columns: 1fr;
+      }
+
       .container {
-        margin: 20px;
-        padding: 25px 15px;
+        padding: 20px;
       }
 
       h1 {
-        font-size: 1.7rem;
-      }
-
-      .lang-toggle {
-        top: 15px;
-        right: 15px;
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        opacity:0.5;
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <button class="lang-toggle" onclick="toggleLanguage()">தமிழ் / English</button>
-    <div id="content"></div>
+    <h1>🎬 Mathan - Video Editor & Thumbnail Designer</h1>
+
+    <div class="button-group">
+      <a href="https://wa.me/918056312543" target="_blank" class="button">📩 WhatsApp</a>
+      <a href="https://t.me/Lee175" target="_blank" class="button">💬 Telegram</a>
+      <a href="https://youtube.com/@mathankumar-uk5zf?si=f3yYHWKjNQUVbfq3" target="_blank" class="button">📺 YouTube</a>
+    </div>
+
+    <h2>🧑‍💼 About Me</h2>
+    <p>
+      Hi, I’m Mathan from Ramanathapuram, Tamil Nadu. I create Reels, Shorts, and Thumbnails using mobile tools like KineMaster, CapCut, and Canva. 
+      I help creators grow by making their content look professional and engaging.
+    </p>
+
+    <h2>🎯 Services</h2>
+    <ul>
+      <li>🎥 Instagram Reels Editing</li>
+      <li>📱 YouTube Shorts Editing</li>
+      <li>📚 Tutorial/Vlog Video Editing</li>
+      <li>🎨 Thumbnail Creation using Canva</li>
+    </ul>
+
+    <div class="highlight">🎁 First Edit FREE - Try Before You Pay!</div>
+
+    <h2>📋 Work Terms</h2>
+    <div class="card-group">
+      <div class="card">
+        <strong>Availability</strong><br>
+        Mon–Sat: 10:00 AM – 8:00 PM<br>
+        Sunday: Urgent Only
+      </div>
+      <div class="card">
+        <strong>Delivery</strong><br>
+        1–2 Days Standard<br>
+        Express (6–12 hrs): +Rs. 50
+      </div>
+      <div class="card">
+        <strong>Pricing</strong><br>
+        Reels/Shorts: Rs. 199+<br>
+        Thumbnails: Rs. 99
+      </div>
+      <div class="card">
+        <strong>Revisions</strong><br>
+        2 Free Revisions<br>
+        Extra: Rs. 50 each
+      </div>
+      <div class="card">
+        <strong>Payment</strong><br>
+        UPI / GPay<br>
+        50% Advance (Big Orders)
+      </div>
+    </div>
+
+    <footer>
+      <p>📍 Based in Ramanathapuram, Tamil Nadu | Freelancing Online</p>
+    </footer>
   </div>
-
-  <script>
-    const contentEl = document.getElementById("content");
-    let isTamil = false;
-
-    const englishContent = `
-      <h1>🎬 Mathan - Video Editor</h1>
-      <p>Hi! I'm a mobile-based video editor offering professional editing for:</p>
-      <ul>
-        <li>🎥 Instagram Reels</li>
-        <li>📱 YouTube Shorts</li>
-        <li>🖥️ Tutorial Videos</li>
-        <li>🖼️ Thumbnail Creation</li>
-      </ul>
-      <p>I use <strong>KineMaster</strong> to deliver smooth transitions, captions, music, and high-quality results — all from my phone!</p>
-
-      <div class="highlight">
-        🎁 <strong>First Video Edit is FREE!</strong>
-      </div>
-
-      <a href="https://wa.me/918056312543" target="_blank" class="cta-button">
-        📩 Contact Me on WhatsApp
-      </a>
-
-      <a href="https://t.me/Lee175" target="_blank" class="telegram-button">
-        💬 Message Me on Telegram
-      </a>
-
-      <h2 style="margin-top: 40px;">📌 Sample Work</h2>
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/wikxgO0Fzik" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <footer>
-        <p>📍 Based in Ramanathapuram, Tamil Nadu | Freelancing Online</p>
-      </footer>
-    `;
-
-    const tamilContent = `
-      <h1>🎬 மதன் - வீடியோ எடிட்டர்</h1>
-      <p>வணக்கம்! மொபைலில் அடிப்படையாக வீடியோ எடிட்டிங் செய்கிறேன். எனது சேவைகள்:</p>
-      <ul>
-        <li>🎥 இன்ஸ்டாகிராம் ரீல்ஸ்</li>
-        <li>📱 யூட்யூப் ஷார்ட்ஸ்</li>
-        <li>🖥️ பயிற்சி வீடியோக்கள்</li>
-        <li>🖼️ தம்ப்நெயில் உருவாக்கம்</li>
-      </ul>
-      <p><strong>KineMaster</strong> மூலம் smooth transition, caption, music மற்றும் quality editing செய்து தருகிறேன்.</p>
-
-      <div class="highlight">
-        🎁 <strong>முதல் வீடியோ எடிட் இலவசம்!</strong>
-      </div>
-
-      <a href="https://wa.me/918056312543" target="_blank" class="cta-button">
-        📩 WhatsApp-இல் தொடர்பு கொள்ளவும்
-      </a>
-
-      <a href="https://t.me/Lee175" target="_blank" class="telegram-button">
-        💬 Telegram-இல் மெசேஜ் செய்யவும்
-      </a>
-
-      <h2 style="margin-top: 40px;">📌 மாதிரியான வேலை</h2>
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/wikxgO0Fzik" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
-
-      <footer>
-        <p>📍 ராமநாதபுரத்தில் இருந்து | ஆன்லைன் வாயிலாக சேவைகள்</p>
-      </footer>
-    `;
-
-    function toggleLanguage() {
-      isTamil = !isTamil;
-      contentEl.innerHTML = isTamil ? tamilContent : englishContent;
-    }
-
-    // Load English by default
-    contentEl.innerHTML = englishContent;
-  </script>
 </body>
 </html>
